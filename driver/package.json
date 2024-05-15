@@ -9,6 +9,7 @@
   "author": "armen",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "socket.io-client": "^4.7.5"
   }
 }
