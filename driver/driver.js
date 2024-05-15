@@ -2,7 +2,7 @@ const eventPool = require('../event-pool');
 const e = require("../event-pool");
 
 function driverPickedUp(id) {
-    console.log("DRIVER: picked up", id);
+    console.log("picked up", id);
 }
 
 module.exports = {
