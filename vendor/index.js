@@ -7,7 +7,7 @@ const {vendor_says} = require('./vendor');
 let serverURL = process.env.SERVER_URL||"http://localhost:3000";
 const socket = io.connect(serverURL);
 
-// start
+// >>>
 setInterval(() => {
     socket.emit('pickup', shippingLabel);
 }, 3000);
