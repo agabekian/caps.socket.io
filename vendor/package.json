@@ -1,0 +1,14 @@
+{
+  "name": "vendor",
+  "version": "1.0.0",
+  "description": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "armen",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

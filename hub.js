@@ -3,7 +3,7 @@
 
 const port = process.env.PORT || 3000;
 const io = require('socket.io')(port);
-
+console.log(port)
 // Automatically triggered anytime a client connects
 io.on('connection', (socket) => {
     console.log('Connected', socket.id);

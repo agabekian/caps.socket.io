@@ -7,6 +7,6 @@
     "socket.io-client": "^4.7.5"
   },
   "scripts": {
-    "start": "nodemon hub.js"
+    "start": "node_modules/.bin/nodemon hub/hub.js"
   }
 }

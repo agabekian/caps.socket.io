@@ -1,7 +1,8 @@
 
 class Payload {
-    constructor(store, orderId, customer, address) {
+    constructor(store, status, orderId, customer, address) {
         this.store = store;
+        this.status = status;
         this.orderId = orderId;
         this.customer = customer;
         this.address = address;

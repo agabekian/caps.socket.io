@@ -16,11 +16,11 @@ socket.on('delivered', (payload) => {
     vendor_says(payload.orderId);
 })
 
-
 const chance = new Chance();
 const orderId = chance.guid({length: 8});
 const shippingLabel = new Shipment(
     "Guitar Center",
+    'label-created',
     orderId,
     "Armen",
     "Central, 8"
