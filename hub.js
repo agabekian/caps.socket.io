@@ -9,9 +9,9 @@ io.on('connection', (socket) => {
     console.log('Connected', socket.id);
 
     // pickupNotification
-    socket.on('pickupNotification', (payload) => {
-        logEvent('pickupNotification', payload)
-        io.emit('pickupNotification', payload) //id only
+    socket.on('pickup', (payload) => {
+        logEvent('pickup', payload)
+        io.emit('pickup', payload) //id only
     });
 
     socket.on('in-transit', payload => {

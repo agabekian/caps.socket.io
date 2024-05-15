@@ -1,20 +1,19 @@
 'use strict';
-const io = require('socket.io-client');
 const Chance = require('chance');
+const io = require('socket.io-client');
 const Shipment = require('./Payload');
-const {vendorThanks} = require('./vendor');
+const {vendor_says} = require('./vendor');
 
-// let serverURL = "https://872d-50-47-110-82.ngrok-free.app";
-let serverURL = "http://localhost:3000";
+let serverURL = process.env.SERVER_URL||"http://localhost:3000";
 const socket = io.connect(serverURL);
 
-// start
+// >>>
 setInterval(() => {
-    socket.emit('pickupNotification', shippingLabel);
+    socket.emit('pickup', shippingLabel);
 }, 3000);
 
 socket.on('delivered', (payload) => {
-    vendorThanks(payload);
+    vendor_says(payload.orderId);
 })
 
 
