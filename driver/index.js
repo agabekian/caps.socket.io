@@ -18,8 +18,9 @@ function handlePickup(payload) {
     setTimeout(() => {
         console.log('DRIVER: Delivered', payload.orderId);
         socket.emit('delivered', payload);
+        payload.status = 'delivered';
         socket.emit('driver-ready');
-    }, 4000);
+    }, 2000);
 
 }
 
