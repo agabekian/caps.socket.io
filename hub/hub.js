@@ -1,6 +1,6 @@
 'use strict';
 // VENDOR -> HUB -> DRIVER - always include payload!
-const Queue = require('./Queue.js'); //lab13
+const Queue = require('../Queue.js'); //lab13
 
 const port = process.env.PORT || 3000;
 const io = require('socket.io')(port);
@@ -8,6 +8,7 @@ const io = require('socket.io')(port);
 console.log(port)
 
 const orders = new Queue();
+const logs = new Queue()
 // Automatically triggered anytime a client connects
 io.on('connection', (socket) => {
     console.log('Connected', socket.id);
@@ -18,6 +19,7 @@ io.on('connection', (socket) => {
 
         console.log('HUB: Order Queued for Pickup', payload);
         console.log('Orders in the queue:', orders.length());
+
         console.log('---------------');
         // Add the order to a queue for the drivers to pick up
         // io.emit('pickup', payload);
@@ -32,8 +34,12 @@ io.on('connection', (socket) => {
 
             socket.emit('pickup', nextOrder);
         } else {
+            if (orders.length() === 0) {
+                console.log("!!!!!!!!!!!! L O G S !!!!!!!!!!!!!!!!!!:")
+                socket.emit('logs-vendor', logs);
+            }
             console.log('HUB: No Orders in Queue');
-            console.log('---------------');
+            console.log('-#-------#--------#------#-')
         }
     });
 
@@ -49,10 +55,19 @@ io.on('connection', (socket) => {
     // From driver : package has been delivered
     socket.on('delivered', (payload) => {
         payload.status = 'delivered';
+        logs.enqueue(payload);
+
+
         console.log('HUB: Package Delivered', payload);
-        console.log('---------------');
         io.emit('delivered', payload);
     });
+
+    function log() {
+        if (orders.length() === 0) {
+            console.log("!!!!!!!!!!!! L O G S !!!!!!!!!!!!!!!!!!:")
+            socket.emit('logs-vendor', logs);
+        }
+    }
 
     // pickupNotification
     // socket.on('pickup', (payload) => {
@@ -112,3 +127,4 @@ function logEvent(event, payload) {
 //     e.emit('notifyVendorOK', payload); // inform the VENDOR packaged delivered.
 // })
 
+module.exports = orders;
